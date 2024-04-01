@@ -30,5 +30,3 @@ mongoose
   .catch(() => {
     console.log(" NOT Connected to DATABASE!");
   });
-
-// mongodb+srv://marthamaxwell02:ikJvZxXGHjLaXUYe@easy-mart-backend.ccyokjk.mongodb.net/?retryWrites=true&w=majority&appName=easy-mart-backend
