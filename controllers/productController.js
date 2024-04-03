@@ -17,6 +17,41 @@ const getProducts = async (req, res) => {
   }
 };
 
+const getPopularProducts = async (req, res) => {
+  try {
+    const popularProducts = await Product.find({ popular: true });
+
+    res.status(200).json({
+      success: true,
+      message: "popular product found",
+      product: popularProducts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Product not created",
+      error: error.message,
+    });
+  }
+};
+
+const getNewProducts = async (req, res) => {
+  try {
+    const newProducts = await Product.find({ newProduct: true });
+
+    res.status(200).json({
+      success: true,
+      message: "new products found",
+      product: newProducts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Product not found",
+      error: error.message,
+    });
+  }
+};
 
 const createProduct = async (req, res) => {
   try {
@@ -35,4 +70,4 @@ const createProduct = async (req, res) => {
   }
 };
 
-export { getProducts, createProduct, getCategories };
+export { getProducts, createProduct, getPopularProducts, getNewProducts };

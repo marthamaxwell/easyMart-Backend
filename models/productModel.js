@@ -36,6 +36,21 @@ const productSchema = mongoose.Schema({
     type: Number,
     default: 1,
   },
+
+  popular: {
+    type: Boolean,
+    default: false,
+  },
+
+  newProduct: {
+    type: Boolean,
+    default: false,
+  },
+
+  specialOffer: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Product = mongoose.model("product", productSchema);
