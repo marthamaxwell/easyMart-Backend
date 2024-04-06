@@ -6,6 +6,7 @@ import {
   getNewProducts,
   getPopularProducts,
   getProducts,
+  singleProduct,
   udateProduct,
 } from "../controllers/productController.js";
 
@@ -17,10 +18,12 @@ router.get("/getProducts/popular", getPopularProducts);
 
 router.get("/getProducts/new", getNewProducts);
 
+router.get("/:id", singleProduct);
+
 router.post("/createProduct", createProduct);
 
-router.put("/updateProduct", udateProduct);
+router.put("/update/:id", udateProduct);
 
-router.delete("/deleteProduct", deleteProduct);
+router.delete("/:id", deleteProduct);
 
 export default router;

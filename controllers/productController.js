@@ -57,6 +57,25 @@ const udateProduct = async (req, res) => {
   }
 };
 
+//get a single product
+const singleProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    res.status(200).json({
+      success: true,
+      message: "product found",
+      product: product,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Product not found",
+      error: error.message,
+    });
+  }
+};
+
 //delete  a product
 const deleteProduct = async (req, res) => {
   try {
@@ -121,4 +140,5 @@ export {
   getNewProducts,
   udateProduct,
   deleteProduct,
+  singleProduct,
 };
