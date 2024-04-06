@@ -1,5 +1,6 @@
 import Product from "../models/productModel.js";
 
+//get all products
 const getProducts = async (req, res) => {
   try {
     const product = await Product.find({});
@@ -17,6 +18,65 @@ const getProducts = async (req, res) => {
   }
 };
 
+//create a product
+const createProduct = async (req, res) => {
+  try {
+    const product = await Product.create(req.body);
+    res.status(201).json({
+      success: true,
+      message: "Product Created Successfully",
+      product: product,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Product not created",
+      error: error.message,
+    });
+  }
+};
+
+//update a product
+const udateProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedProduct = await Product.findByIdAndUpdate(id, req.body);
+
+    const updateFilled = await Product.findByIdAndUpdate(id);
+    res.status(200).json({
+      success: true,
+      message: "product updated successfully",
+      product: updateFilled,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Product not updated",
+      error: error.message,
+    });
+  }
+};
+
+//delete  a product
+const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findByIdAndDelete(id);
+    res.status(200).json({
+      success: true,
+      message: "product deleted successfully",
+      product: product,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Product not deleted",
+      error: error.message,
+    });
+  }
+};
+
+//get all popular products
 const getPopularProducts = async (req, res) => {
   try {
     const popularProducts = await Product.find({ popular: true });
@@ -35,6 +95,7 @@ const getPopularProducts = async (req, res) => {
   }
 };
 
+//get all new products
 const getNewProducts = async (req, res) => {
   try {
     const newProducts = await Product.find({ newProduct: true });
@@ -53,21 +114,11 @@ const getNewProducts = async (req, res) => {
   }
 };
 
-const createProduct = async (req, res) => {
-  try {
-    const product = await Product.create(req.body);
-    res.status(201).json({
-      success: true,
-      message: "Product Created Successfully",
-      product: product,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Product not created",
-      error: error.message,
-    });
-  }
+export {
+  getProducts,
+  createProduct,
+  getPopularProducts,
+  getNewProducts,
+  udateProduct,
+  deleteProduct,
 };
-
-export { getProducts, createProduct, getPopularProducts, getNewProducts };
