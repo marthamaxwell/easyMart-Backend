@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import productRoutes from "./routes/productRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ const myPort = process.env.MyPort;
 
 app.use("/", productRoutes);
 app.use("/category", categoryRoutes);
+app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello world");
