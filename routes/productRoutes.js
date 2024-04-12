@@ -14,9 +14,9 @@ const router = express.Router();
 
 router.get("/getProducts", getProducts);
 
-router.get("/getProducts/popular", getPopularProducts);
+router.get("/popular", getPopularProducts);
 
-router.get("/getProducts/new", getNewProducts);
+router.get("/new", getNewProducts);
 
 router.get("/:id", singleProduct);
 

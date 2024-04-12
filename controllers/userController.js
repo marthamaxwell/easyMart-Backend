@@ -95,7 +95,7 @@ const login = async (req, res) => {
     },
     process.env.BLABLA,
     {
-      expiresIn: "5m",
+      expiresIn: "60",
     }
   );
 
@@ -110,12 +110,21 @@ const login = async (req, res) => {
     }
   );
 
+  const userData = {
+    _id: validEmail?._id,
+    name: validEmail?.name,
+    username: validEmail?.username,
+    bio: validEmail?.bio,
+    admin: validEmail?.isAdmin,
+    phone_number: validEmail?.phone_number,
+  };
+
   //push to cookies
   res.cookie("hellomiss", accessToken, {
     httponly: true,
     secure: true,
     sameSite: "none",
-    maxAge: 5 * 60 * 1000,
+    maxAge: 60 * 1000,
   });
 
   res.cookie("hellobro", refreshToken, {
@@ -128,18 +137,26 @@ const login = async (req, res) => {
   return res.status(200).json({
     success: true,
     message: "Login successful.",
+    user: userData,
   });
 };
 
 const validateToken = (req, res) => {
-  const cookies = req.body;
-  const cookie = req.headers;
-
-  console.log("the cookies here==>", cookies);
-  console.log("the cookie here==>", cookie);
-
+  const authUser = req.user;
+  const userData = {
+    _id: authUser._id,
+    name: authUser.name,
+    username: authUser.username,
+    email: authUser.email,
+    bio: authUser.bio,
+    phone_number: authUser.phone_number,
+    isAdmin: authUser.isAdmin,
+  };
+  console.log("User data:", userData);
   return res.status(200).json({
-    message: "api init",
+    valid: true,
+    message: "access granted",
+    details: userData,
   });
 };
 

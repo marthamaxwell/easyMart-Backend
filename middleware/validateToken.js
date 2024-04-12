@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import User from "../models/user.model.js";
+import User from "../models/userModel.js";
 export const checkAndRenewToken = (req, res, next) => {
   const shortlived = req.cookies.hellomiss;
   const longlived = req.cookies.hellobro;
@@ -59,7 +59,7 @@ export const checkAndRenewToken = (req, res, next) => {
         req.id = decoded.access2;
         // checking the decoded
         const validuser = await User.findById(decoded.access2).exec();
-        console.log("request id => ", req.id);
+        console.log("request id => ", req._id);
         console.log("the valid user from reset => ", validuser);
         if (!validuser) {
           return res
