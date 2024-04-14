@@ -111,7 +111,6 @@ const login = async (req, res) => {
   );
 
   const userData = {
-    _id: validEmail?._id,
     name: validEmail?.name,
     username: validEmail?.username,
     bio: validEmail?.bio,
@@ -155,7 +154,7 @@ const validateToken = (req, res) => {
   console.log("User data:", userData);
   return res.status(200).json({
     valid: true,
-    message: "access granted",
+    message: [`welcome! ${userData.name}`],
     details: userData,
   });
 };

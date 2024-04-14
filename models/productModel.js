@@ -29,7 +29,7 @@ const productSchema = mongoose.Schema({
 
   description: {
     type: String,
-    required: [true, "Please enter the product description"],
+    default: String,
   },
 
   stock: {

@@ -6,8 +6,9 @@ const getProducts = async (req, res) => {
     const product = await Product.find({});
     res.status(200).json({
       success: true,
-      message: "Popular Products",
+      message: "All Products",
       getProducts: product,
+      ProductLength: product.length,
     });
   } catch (error) {
     res.status(500).json({
@@ -102,13 +103,31 @@ const getPopularProducts = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "popular product found",
+      message: "popular products found",
       product: popularProducts,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Product not created",
+      message: "Popular Products Not found",
+      error: error.message,
+    });
+  }
+};
+
+const getSpeacialOfferProducts = async (req, res) => {
+  try {
+    const specialOfferProducts = await Product.find({ specialOffer: true });
+
+    res.status(200).json({
+      success: true,
+      message: "special offer products found",
+      product: specialOfferProducts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "special offer products not found",
       error: error.message,
     });
   }
@@ -127,7 +146,7 @@ const getNewProducts = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Product not found",
+      message: "New Products not found",
       error: error.message,
     });
   }
@@ -138,6 +157,7 @@ export {
   createProduct,
   getPopularProducts,
   getNewProducts,
+  getSpeacialOfferProducts,
   udateProduct,
   deleteProduct,
   singleProduct,
