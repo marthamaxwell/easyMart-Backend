@@ -95,7 +95,7 @@ const login = async (req, res) => {
     },
     process.env.BLABLA,
     {
-      expiresIn: "60",
+      expiresIn: "40",
     }
   );
 
@@ -111,6 +111,7 @@ const login = async (req, res) => {
   );
 
   const userData = {
+    _id: validEmail?._id,
     name: validEmail?.name,
     username: validEmail?.username,
     bio: validEmail?.bio,
@@ -142,6 +143,12 @@ const login = async (req, res) => {
 
 const validateToken = (req, res) => {
   const authUser = req.user;
+  if (!authUser) {
+    return res.status(401).json({
+      valid: false,
+      message: "Unauthorized",
+    });
+  }
   const userData = {
     _id: authUser._id,
     name: authUser.name,
@@ -154,7 +161,7 @@ const validateToken = (req, res) => {
   console.log("User data:", userData);
   return res.status(200).json({
     valid: true,
-    message: [`welcome! ${userData.name}`],
+    message: [`welcome! ${userData.name}🙂`],
     details: userData,
   });
 };

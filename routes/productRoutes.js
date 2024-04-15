@@ -21,7 +21,7 @@ router.get("/offer", getSpeacialOfferProducts);
 
 router.get("/new", getNewProducts);
 
-router.get("/singleProduct/:id", singleProduct);
+router.get("/:id", singleProduct);
 
 router.post("/createProduct", createProduct);
 
