@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
-export const checkAndRenewToken = (req, res, next) => {
+export const checkAndRenewToken = async (req, res, next) => {
   const shortlived = req.cookies.hellomiss;
   const longlived = req.cookies.hellobro;
   console.log("short lived token => ", shortlived);
@@ -40,7 +40,7 @@ export const checkAndRenewToken = (req, res, next) => {
           console.log("the new access token => ", accessToken);
           res.cookie("hellomiss", accessToken, {
             httpOnly: true,
-            secure: true,
+            secure: false,
             sameSite: "none",
             maxAge: 60 * 1000,
           });

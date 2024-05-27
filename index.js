@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 const db = process.env.DATABASE_URL;
 const myPort = process.env.MyPort;
-app.set("trust proxy", 1);
+// app.set("trust proxy", 1);
 app.use(cookieParser());
 app.use(
   cors({

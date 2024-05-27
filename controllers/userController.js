@@ -122,14 +122,14 @@ const login = async (req, res) => {
   //push to cookies
   res.cookie("hellomiss", accessToken, {
     httponly: true,
-    secure: true,
+    secure: false,
     sameSite: "none",
     maxAge: 60 * 1000,
   });
 
   res.cookie("hellobro", refreshToken, {
     httponly: true,
-    secure: true,
+    secure: false,
     sameSite: "none",
     maxAge: 1 * 24 * 60 * 60 * 1000,
   });
@@ -141,7 +141,7 @@ const login = async (req, res) => {
   });
 };
 
-const validateToken = (req, res) => {
+const validateToken = async (req, res) => {
   const authUser = req.user;
   if (!authUser) {
     return res.status(401).json({
